@@ -158,7 +158,7 @@ const InstagramClone = () => {
     try {
       await auth.signOut();
       setFirebaseUser(null);
-      router.push('/'); // Asegúrate de redirigir después de cerrar sesión
+      router.push('/'); 
     } catch (error) {
       console.error('Error al cerrar sesión', error);
     }

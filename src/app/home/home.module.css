@@ -87,14 +87,14 @@
 }
 
 .addPostbtn {
-    background-color: white;
+    background-color: white !important;
     height: 3rem;
     width: 3rem;
     border-radius: 50px;
     position: fixed;
     bottom: 2rem;
     right: 2rem;
-    color: #292e49;
+    color: #292e49 !important;
 }
 
 .addPostbtn:hover {
@@ -142,7 +142,7 @@
 
 .addPostBtn {
     margin-top: 1rem;
-    background-color: #292e49;
+    background-color: #292e49 !important;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
@@ -162,7 +162,7 @@ margin-top: 1rem;
 }
 
 .logOutBtn{
-    background-color: #292e49;
+    background-color: #292e49 !important;
     color: white;
     padding: 0.5rem 1rem;
     border: none;
