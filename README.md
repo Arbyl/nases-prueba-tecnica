@@ -1,36 +1,43 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Este es un proyecto [Next.js](https://nextjs.org) inicializado con [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+## Comenzando
 
-First, run the development server:
+Primero, ejecuta el servidor de desarrollo:
 
 ```bash
 npm run dev
-# or
+# o
 yarn dev
-# or
+# o
 pnpm dev
-# or
+# o
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Abre [http://localhost:3000](http://localhost:3000) en tu navegador para ver el resultado.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Puedes comenzar a editar la página modificando `app/page.tsx`. La página se actualiza automáticamente a medida que editas el archivo.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Este proyecto usa [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) para optimizar y cargar automáticamente [Geist](https://vercel.com/font), una nueva familia de fuentes para Vercel.
 
-## Learn More
+## Aprende a usar la App
+Al inciar aparecera una ventana solicitando iniciar sesión, es necesario para ver el contenido del sitio.
 
-To learn more about Next.js, take a look at the following resources:
+![image](https://github.com/user-attachments/assets/11eea666-ec8b-4667-bd20-251b99417d51)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+Al validar tu cuenta se te redirigira al Home, una página con posts, te invito a dar like y comentar los post
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+![image](https://github.com/user-attachments/assets/127eb662-d53d-4530-b065-9057a85c1c23)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+Puedes agregar posts adicionales dando click en el boton de la esquina inferior derecha, te pedira una URL y si deseas agregar un comentario al post 
+
+![image](https://github.com/user-attachments/assets/fe4eb2c7-714f-43b0-bc0b-ea8ea7f64af4)
+
+
+Al oprimir el boton de agregar post actualizará la vista de home con el nuevo post creado
+
+![image](https://github.com/user-attachments/assets/b56f09bc-a4b1-40ab-abe1-6ad0d09aa1ee)
+
