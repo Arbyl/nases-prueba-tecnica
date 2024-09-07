@@ -1,0 +1,57 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.bgGradient {
+    width: 100%;
+    height: 100vh;
+    z-index: -111;
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    background: #536976;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to bottom, #536976, #292e49);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to bottom, #536976, #292e49);
+}
+
+.cardFooter_likeSection {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.cardFooter_liked {
+    color: red;
+    fill: red;
+}
+
+.cardFooter_commentsSection {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.cardFooter_commentForm {
+    margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.cardFooter_commentInput {
+    width: 50px;
+}
+
+.sendBtn {
+    height: 1.5rem;
+    width: 1.5rem;
+}
