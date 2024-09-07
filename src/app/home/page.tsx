@@ -1,12 +1,15 @@
 'use client'
 
-import React, { useState } from 'react'
-import { Heart, Send, Plus, CircleX } from 'lucide-react'
+import React, { useEffect, useState } from 'react'
+import { Heart, Send, Plus, CircleX, LogOut, Divide } from 'lucide-react'
 import Avatar from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import styles from './home.module.css'
+import { onAuthStateChanged, User as FirebaseUser } from 'firebase/auth';
+import { auth } from '../../config/firebaseConfig';
+import { useRouter } from 'next/navigation';
 
 // Definición de tipos
 type Comment = {
@@ -112,8 +115,10 @@ const InstagramClone = () => {
     }
   ])
 
-  const [newPost, setNewPost] = useState({ comment: '', imageUrl: '' })
-  const [userName, setUserName] = useState('Cool User')
+  const [newPost, setNewPost] = useState({ comment: '', imageUrl: '' });
+  const [userName, setUserName] = useState('Cool User');
+  const [firebaseUser, setFirebaseUser] = useState<FirebaseUser | null>(null);
+  const router = useRouter();
 
   const handleLike = (postId: number) => {
     setPosts(posts.map(post =>
@@ -149,13 +154,45 @@ const InstagramClone = () => {
     }
   }
 
+  const handleLogOut = async () => {
+    try {
+      await auth.signOut();
+      setFirebaseUser(null);
+      router.push('/'); // Asegúrate de redirigir después de cerrar sesión
+    } catch (error) {
+      console.error('Error al cerrar sesión', error);
+    }
+  };
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        setFirebaseUser(user);
+      } else {
+        setFirebaseUser(null);
+        router.push('/');
+      }
+    });
+    return () => unsubscribe();
+  }, []);
+
   return (
     <div className={styles.container}>
       <div className={styles.bgGradient}></div>
       <h1>Aventura Digital</h1>
 
+      {firebaseUser && (
+        <div>active</div>)}
+
+      {!firebaseUser && (
+        <div>no active</div>)}
+
       <Button onClick={() => setShowModal(true)} classname={styles.addPostbtn}>
         <Plus />
+      </Button>
+
+      <Button onClick={handleLogOut} classname={styles.logOutBtn}>
+        Salir <LogOut />
       </Button>
 
       {showModal && (

@@ -160,3 +160,18 @@
 margin-top: 1rem;
 
 }
+
+.logOutBtn{
+    background-color: #292e49;
+    color: white;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
