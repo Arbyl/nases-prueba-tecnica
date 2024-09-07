@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { Heart, MessageCircle, Send } from 'lucide-react'
+import { Heart, Send, Plus, CircleX } from 'lucide-react'
 import Avatar from "@/components/ui/avatar"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
@@ -37,49 +37,54 @@ const PostCard: React.FC<{ post: Post, onLike: () => void, onComment: (text: str
   }
 
   return (
-    <Card>
-      <CardHeader>
-        <Avatar nombre={post.username} />
-        <span>{post.username}</span>
-      </CardHeader>
-      <CardContent>
-        <img src={post.imageUrl} alt="Post" />
-      </CardContent>
+    <div className={styles.cardContainer_anim}>
 
-      <CardFooter>
-        <div className={styles.cardFooter_likeSection}>
-          <Button onClick={onLike}>
-            <Heart className={post.liked ? `${styles.cardFooter_liked}` : ""} />
-          </Button>
-          <span>{post.likes} likes</span>
-        </div>
+      <Card>
+        <CardHeader>
+          <Avatar nombre={post.username} />
+          <span>{post.username}</span>
+        </CardHeader>
+        <CardContent>
+          <img src={post.imageUrl} alt="Post" />
+        </CardContent>
 
-        <div className={styles.cardFooter_commentsSection}>
-          {post.comments.map((comment) => (
-            <p key={comment.id}>
-              <span>{comment.username}:</span> {comment.text}
-            </p>
-          ))}
-        </div>
-        <form onSubmit={handleCommentSubmit} className={styles.cardFooter_commentForm}>
-          <Input
-            type="text"
-            placeholder="Add a comment..."
-            value={commentText}
-            onChange={(e) => setCommentText(e.target.value)}
-            className={styles.cardFooter_commentInput}
-          />
-          <Button type="submit" size="icon">
-            <Send className={styles.sendBtn} />
-          </Button>
-        </form>
-      </CardFooter>
-    </Card>
+        <CardFooter>
+          <div className={styles.cardFooter_likeSection}>
+            <Button onClick={onLike}>
+              <Heart className={post.liked ? `${styles.cardFooter_liked}` : ""} />
+            </Button>
+            <span>{post.likes} likes</span>
+          </div>
+
+          <div className={styles.cardFooter_commentsSection}>
+            {post.comments.map((comment) => (
+              <p key={comment.id}>
+                <span>{comment.username}:</span> {comment.text}
+              </p>
+            ))}
+          </div>
+          <form onSubmit={handleCommentSubmit} className={styles.cardFooter_commentForm}>
+            <Input
+              type="text"
+              placeholder="Add a comment..."
+              value={commentText}
+              onChange={(e) => setCommentText(e.target.value)}
+              className={styles.cardFooter_commentInput}
+            />
+            <Button type="submit" size="icon">
+              <Send className={styles.sendBtn} />
+            </Button>
+          </form>
+        </CardFooter>
+      </Card>
+    </div>
   )
 }
 
 // Componente principal
 const InstagramClone = () => {
+  const [showModal, setShowModal] = useState(false)
+
   const [posts, setPosts] = useState<Post[]>([
     {
       id: 1,
@@ -107,21 +112,22 @@ const InstagramClone = () => {
     }
   ])
 
-  const [newPost, setNewPost] = useState({ username: '', imageUrl: '' })
+  const [newPost, setNewPost] = useState({ comment: '', imageUrl: '' })
+  const [userName, setUserName] = useState('Cool User')
 
   const handleLike = (postId: number) => {
-    setPosts(posts.map(post => 
-      post.id === postId 
-        ? { ...post, likes: post.liked ? post.likes - 1 : post.likes + 1, liked: !post.liked } 
+    setPosts(posts.map(post =>
+      post.id === postId
+        ? { ...post, likes: post.liked ? post.likes - 1 : post.likes + 1, liked: !post.liked }
         : post
     ));
   };
 
   const handleComment = (postId: number, text: string) => {
-    setPosts(posts.map(post => 
-      post.id === postId ? { 
-        ...post, 
-        comments: [...post.comments, { id: post.comments.length + 1, username: "currentUser", text }] 
+    setPosts(posts.map(post =>
+      post.id === postId ? {
+        ...post,
+        comments: [...post.comments, { id: post.comments.length + 1, username: userName, text }]
       } : post
     ))
   }
@@ -131,14 +137,15 @@ const InstagramClone = () => {
     if (newPost.imageUrl.trim()) {
       const newPostData: Post = {
         id: posts.length + 1,
-        username: newPost.username,
+        username: userName,
         imageUrl: newPost.imageUrl,
         likes: 0,
         liked: false,
-        comments: []
+        comments: [{ id: posts.length + 1, username: userName, text: newPost.comment }]
       }
+      handleComment(newPostData.id, 'First comment')
       setPosts([newPostData, ...posts])
-      setNewPost({ username: '', imageUrl: '' })
+      setNewPost({ comment: '', imageUrl: '' })
     }
   }
 
@@ -147,22 +154,45 @@ const InstagramClone = () => {
       <div className={styles.bgGradient}></div>
       <h1>Aventura Digital</h1>
 
-      <form onSubmit={handleAddPost}>
-        <Input 
-          type="text" 
-          placeholder="Image URL" 
-          value={newPost.imageUrl} 
-          onChange={(e) => setNewPost({ ...newPost, imageUrl: e.target.value })} 
-        />
-        <Button type="submit">Add Post</Button>
-      </form>
+      <Button onClick={() => setShowModal(true)} classname={styles.addPostbtn}>
+        <Plus />
+      </Button>
+
+      {showModal && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <Button classname={styles.closeBtn} onClick={() => setShowModal(false)}>
+              <CircleX className={styles.closebtnicon} />
+            </Button>
+            <form onSubmit={handleAddPost} className={styles.modalForm}>
+              <p>URL de tu imagen</p>
+              <Input
+                type="text"
+                placeholder="https://example.com/image.jpg"
+                value={newPost.imageUrl}
+                onChange={(e) => setNewPost({ ...newPost, imageUrl: e.target.value })}
+              />
+
+              <p>Añade un comentario</p>
+              <Input
+                type='text'
+                placeholder='Nice shot!'
+                value={newPost.comment}
+                onChange={(e) => setNewPost({ ...newPost, comment: e.target.value })}
+              />
+
+              <Button classname={styles.addPostBtn} type="submit">Add Post</Button>
+            </form>
+          </div>
+        </div>
+      )}
 
       {posts.map(post => (
-        <PostCard 
-          key={post.id} 
-          post={post} 
-          onLike={() => handleLike(post.id)} 
-          onComment={(text) => handleComment(post.id, text)} 
+        <PostCard
+          key={post.id}
+          post={post}
+          onLike={() => handleLike(post.id)}
+          onComment={(text) => handleComment(post.id, text)}
         />
       ))}
     </div>

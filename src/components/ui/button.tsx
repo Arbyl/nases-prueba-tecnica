@@ -14,7 +14,7 @@ export const Button: React.FC<ButtonProps> = ({ children, onClick, type, size='d
     <button
      onClick={onClick}
       type={type}
-      className={classname}
+      className={styles.button + ' ' + styles[size] + ' ' + classname}
      >
       {children}
     </button>
