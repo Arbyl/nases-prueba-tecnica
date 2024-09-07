@@ -1,5 +1,11 @@
 Este es un proyecto [Next.js](https://nextjs.org) inicializado con [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Acceso al sitio web
+
+El sitio se encuentra desplegado en Vercel bajo la url: 
+[https://nases-prueba-tecnica-dqg6mvfr4-arbyls-projects.vercel.app/](https://nases-prueba-tecnica-dqg6mvfr4-arbyls-projects.vercel.app/)
+
+
 ## Comenzando
 
 Primero, ejecuta el servidor de desarrollo:
@@ -40,4 +46,10 @@ Puedes agregar posts adicionales dando click en el boton de la esquina inferior 
 Al oprimir el boton de agregar post actualizará la vista de home con el nuevo post creado
 
 ![image](https://github.com/user-attachments/assets/b56f09bc-a4b1-40ab-abe1-6ad0d09aa1ee)
+
+
+## Consideraciones de la App
+- El login se lleva a cabo en la pagina de inicio/login `/`, y no permite el acceso a `/home` sin autenticar.
+- Una vez autenticado (en la pagina de `/home`)no es posible acceder a la pagina de inicio/login debido a que ya se encuentra autenticado, en tal caso sera redirigido a `/home`.
+- Para volver a la pagina inicial es necesario dar click en el boton de cerrar sesion en la parte superior derecha de la pagina de `/home` 
 
