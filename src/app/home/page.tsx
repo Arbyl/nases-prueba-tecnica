@@ -139,6 +139,7 @@ const InstagramClone = () => {
 
   const handleAddPost = (e: React.FormEvent) => {
     e.preventDefault()
+    setShowModal(false);
     if (newPost.imageUrl.trim()) {
       const newPostData: Post = {
         id: posts.length + 1,
